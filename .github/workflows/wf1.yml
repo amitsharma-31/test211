@@ -1,17 +1,10 @@
-name: Variable at WF level
+name: Variable & secrets
 on: push
-env:
-  CONTAINER_REGISTRY: docker.io
-  DOCKER_USERNAME: test-user
-  IMAGE_NAME: my-test-imag
 jobs:
   docker-job-1:
     runs-on: ubuntu-latest
     steps:
       - name: name of the step1
-        run: echo docker registry is ${{ env.CONTAINER_REGISTRY }}
-  docker-job-2:
-    runs-on: ubuntu-latest
-    steps:
+        run: echo docker registry is ${{ secrets.CONTAINER_REGISTRY }}
       - name: name of the step2
-        run: echo docker image to use ${{ env.IMAGE_NAME }} #you can also mention it like $IMAGE_NAME
+        run: echo docker image to use ${{ vars.IMAGE_NAME }}
