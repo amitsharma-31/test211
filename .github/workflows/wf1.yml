@@ -2,9 +2,12 @@ name: Concurrency Example
 on: push
 jobs:
   test-job-1:
+    concurrency:
+      group: test-group
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - name: name of the step1
         run: echo test message
       - name: Sleep
-        run: sleep 600  #testing
+        run: sleep 600
