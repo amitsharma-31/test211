@@ -1,11 +1,16 @@
-name: Extra binary example
+name: Example to execute shell script
 on: push
 jobs:
   sample_main_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Install binary
-        run: sudo apt-get install cowsay -y
-
-      - name: Execute cowsay example
-        run: cowsay -f dragon "Run for cover, I am a DRAGON…RAWR" >> dragon.txt
+      - name: First step
+        run: echo "This is our first step within our job 1 of workflow 1"
+      - name: Clone my repo
+        uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Execute some script
+        run: |
+          chmod +x script1.sh 
+          ./script1.sh
