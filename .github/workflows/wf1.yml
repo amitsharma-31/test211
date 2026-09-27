@@ -1,4 +1,4 @@
-name: Example multiple jobs   ##optional
+name: Example multiple jobs
 on: push
 jobs:
   first-job:
@@ -8,6 +8,7 @@ jobs:
         run: ls -ltra
 
   second-job:
+    needs: first-job    #### so second job require first job to finish
     runs-on: ubuntu-latest
     steps:
       - name: Clone my repo
