@@ -1,16 +1,19 @@
-name: Example to execute shell script
+name: Example multiple jobs   ##optional
 on: push
 jobs:
-  sample_main_job:
+  first-job:
     runs-on: ubuntu-latest
     steps:
-      - name: First step
-        run: echo "This is our first step within our job 1 of workflow 1"
+      - name: Some test
+        run: ls -ltra
+
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
       - name: Clone my repo
         uses: actions/checkout@v7
         with:
           ref: main
-      - name: Execute some script
-        run: |
-          chmod +x script1.sh 
-          ./script1.sh
+
+      - name: Some test
+        run: cat README.md
