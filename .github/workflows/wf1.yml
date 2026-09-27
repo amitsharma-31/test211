@@ -1,13 +1,14 @@
-name: Concurrency Example
-on: push
+name: Matrix example2
+on: 
+  push:
+  workflow_dispatch:
 jobs:
-  test-job-1:
-    concurrency:
-      group: test-group
-      cancel-in-progress: true
-    runs-on: ubuntu-latest
+  docker:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04]
+        images: [hello-world, alpine]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: name of the step1
-        run: echo test message
-      - name: Sleep
-        run: sleep 600 #test
+      - name: Run image ${{ matrix.images }} on ${{ matrix.os }}
+        run: docker run ${{ matrix.images }}
