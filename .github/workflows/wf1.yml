@@ -1,10 +1,10 @@
-name: Variable & secrets
+name: Concurrency Example
 on: push
 jobs:
-  docker-job-1:
+  test-job-1:
     runs-on: ubuntu-latest
     steps:
       - name: name of the step1
-        run: echo docker registry is ${{ secrets.CONTAINER_REGISTRY }}
-      - name: name of the step2
-        run: echo docker image to use ${{ vars.IMAGE_NAME }}
+        run: echo test message
+      - name: Sleep
+        run: sleep 600
