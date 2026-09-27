@@ -1,11 +1,11 @@
-name: Multiline example
+name: Extra binary example
 on: push
 jobs:
   sample_main_job:
     runs-on: ubuntu-latest
     steps:
-      - name: First step
-        run: |               ## since it is yaml we have used | and then multiline statement
-          echo "Print some random message"
-          ls -ltra
-          cat README.md
+      - name: Install binary
+        run: sudo apt-get install cowsay -y
+
+      - name: Execute cowsay example
+        run: cowsay -f dragon "Run for cover, I am a DRAGON…RAWR" >> dragon.txt
