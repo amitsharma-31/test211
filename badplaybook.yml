@@ -1,0 +1,14 @@
+---
+- name: deploy a web app
+  hosts: localhost
+  tasks:
+  - name: Install apache 
+    ansible.builtin.apt: 
+      name: apache2
+      state: present
+
+  # ansible-lint error: Tasks must be named, and you should use the git module, not command
+  - command: git clone https://github.com /var/www/html
+    
+   # yamllint error: Bad indentation below
+     # trailing space here: 
