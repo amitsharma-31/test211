@@ -1,0 +1,16 @@
+---
+- name: Deploy a web app
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Apache web server
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+
+    - name: Clone the web application repository
+      ansible.builtin.git:
+        repo: https://github.com
+        dest: /var/www/html
+        single_branch: true
+        version: main
