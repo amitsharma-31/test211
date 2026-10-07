@@ -1,0 +1,25 @@
+name: Pylint Code Review Demo
+
+on: [push, pull_request]
+
+jobs:
+  run-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Pylint
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+
+      - name: Run Pylint Analysis
+        run: |
+          # The --fail-under flag forces GitHub Actions to fail if the score drops below 9.0
+          pylint app.py --fail-under=9.0
