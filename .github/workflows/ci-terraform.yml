@@ -1,0 +1,40 @@
+name: Terraform Lint and Validate Demo
+
+on: [push, pull_request]
+
+jobs:
+  terraform-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      # 1. Setup Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.0"
+
+      # 2. Setup TFLint
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: "latest"
+
+      # 3. Check code formatting (fails if code is not ran through 'terraform fmt')
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      # 4. Initialize (Required before running validate)
+      - name: Terraform Init
+        run: terraform init
+
+      # 5. Validate Syntax and Arguments
+      - name: Terraform Validate
+        run: terraform validate
+
+      # 6. Run TFLint best practices analysis
+      - name: Run TFLint
+        run: |
+          tflint --init
+          tflint -f compact
