@@ -1,6 +1,5 @@
 name: Debugging Example
 on:
-  push:
   workflow_dispatch:
 env:
   FNAME: "AMIT"
@@ -17,6 +16,5 @@ jobs:
       - name: Step3
         run: |
           echo "Username ===== $USERNAME"
-          exit 1
       - name: step4
         run: echo ${{ env.LNAME }}
